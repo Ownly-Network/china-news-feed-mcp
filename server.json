@@ -8,7 +8,7 @@
   "websiteUrl": "https://github.com/Ownly-Network/china-news-feed-mcp",
   "remotes": [{
     "type": "streamable-http",
-    "url": "https://china-news-feed-mcp.joyd-ai-2026.workers.dev/mcp",
+    "url": "https://china-news-feed-mcp.joyd-ai-2026.workers.dev/mcp?src=ownly-network",
     "headers": [{"description": "Optional: your own Apify API token for the full-feed tools (billed to your Apify account). get_sample works without it.", "isSecret": true, "name": "x-apify-token"}]
   }]
 }
