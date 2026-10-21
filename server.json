@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.ownly-network/china-news-feed",
+  "name": "io.github.Ownly-Network/china-news-feed",
   "description": "China news (EN/ZH), Weibo 微博/Baidu 百度/Zhihu 知乎 hot lists and deletion watch from public data.",
   "title": "China News Feed",
   "repository": {"url": "https://github.com/Ownly-Network/china-news-feed-mcp", "source": "github"},
