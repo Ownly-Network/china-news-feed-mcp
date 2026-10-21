@@ -1,0 +1,14 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.ownly-network/china-news-feed",
+  "description": "China news (EN/ZH), Weibo 微博/Baidu 百度/Zhihu 知乎 hot lists and deletion watch from public data.",
+  "title": "China News Feed",
+  "repository": {"url": "https://github.com/Ownly-Network/china-news-feed-mcp", "source": "github"},
+  "version": "1.0.1",
+  "websiteUrl": "https://github.com/Ownly-Network/china-news-feed-mcp",
+  "remotes": [{
+    "type": "streamable-http",
+    "url": "https://china-news-feed-mcp.joyd-ai-2026.workers.dev/mcp",
+    "headers": [{"description": "Optional: your own Apify API token for the full-feed tools (billed to your Apify account). get_sample works without it.", "isSecret": true, "name": "x-apify-token"}]
+  }]
+}
