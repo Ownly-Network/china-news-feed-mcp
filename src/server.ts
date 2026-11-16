@@ -46,7 +46,7 @@ class ToolError extends Error {}
 async function runActor(input: Row): Promise<Row[]> {
   const token = process.env.APIFY_TOKEN?.trim();
   if (!token) throw new ToolError("APIFY_TOKEN is missing. Set it to your own Apify API token before calling this tool.");
-  const url = new URL("https://api.apify.com/v2/acts/china.unofficial~china-news-feed/run-sync-get-dataset-items");
+  const url = new URL("https://api.apify.com/v2/acts/china.unofficial~china-hot-search-english/run-sync-get-dataset-items");
   url.searchParams.set("token", token);
   url.searchParams.set("clean", "1");
   const signal = AbortSignal.timeout(300_000);
@@ -83,16 +83,16 @@ async function execute(input: Row, lang: Language, filter: (row: Row) => boolean
 export function createServer(): McpServer {
   const server = new McpServer({ name: "china-news-feed-mcp", version: "1.0.0" });
   server.registerTool("get_china_news", {
-    description: "Fetch China news. Costs $8 per 1,000 dataset rows on your Apify account. Query and language are applied locally after billing.",
+    description: "Fetch China news. Costs $8 per 1,000 dataset rows (rising to $15 in December) on your Apify account. Query and language are applied locally after billing.",
     inputSchema: { language, maxItems, query: z.string().optional(), sources: z.array(z.string()).optional(), sourceTypes: z.array(z.enum(sourceTypes)).optional() },
   }, async args => execute({ maxItems: args.maxItems, hotLists: [], ...(args.sources !== undefined ? { newsSources: args.sources } : {}), ...(args.sourceTypes !== undefined ? { sourceTypes: args.sourceTypes } : {}) }, args.language,
     row => row.kind === "news" && (args.query === undefined || [row.headline_en, row.headline_original].some(h => typeof h === "string" && h.toLowerCase().includes(args.query!.toLowerCase())))));
   server.registerTool("get_hot_lists", {
-    description: "Fetch Chinese platform hot lists. Costs $8 per 1,000 dataset rows on your own Apify account.",
+    description: "Fetch Chinese platform hot lists. Costs $8 per 1,000 dataset rows (rising to $15 in December) on your own Apify account.",
     inputSchema: { platforms: platformInput, maxRank: z.number().int().min(5).max(50).default(50), maxItems, language },
   }, async args => execute({ sourceTypes: [], hotLists: args.platforms, maxHotRank: args.maxRank, maxItems: args.maxItems }, args.language, row => row.kind === "hot"));
   server.registerTool("get_deletions", {
-    description: "Fetch deletion-watch flags (including provisional and returned statuses). Costs $8 per 1,000 fetched dataset rows; unflagged rows also count toward billing.",
+    description: "Fetch deletion-watch flags (including provisional and returned statuses). Costs $8 per 1,000 fetched dataset rows (rising to $15 in December); unflagged rows also count toward billing.",
     inputSchema: { platforms: platformInput, maxItems, highRank: z.number().int().min(3).max(50).optional() },
   }, async args => execute({ sourceTypes: [], hotLists: args.platforms, maxItems: args.maxItems, ...(args.highRank !== undefined ? { highRank: args.highRank } : {}) }, "both", row => row.censorship !== null && row.censorship !== undefined));
   return server;

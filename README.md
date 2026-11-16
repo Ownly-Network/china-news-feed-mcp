@@ -1,8 +1,8 @@
 # china-news-feed-mcp
 
-A TypeScript MCP server for China news, platform hot lists, and deletion-watch flags, wrapping the [China News Feed Apify actor](https://apify.com/china.unofficial/china-news-feed) (`CeTIPfpcWcDrEhrPV`). Uses Node.js 20 native fetch and MCP over stdio.
+A TypeScript MCP server for China news, platform hot lists, and deletion-watch flags, wrapping the [China News Feed Apify actor](https://apify.com/china.unofficial/china-hot-search-english) (`CeTIPfpcWcDrEhrPV`). Uses Node.js 20 native fetch and MCP over stdio.
 
-Actor usage costs **$8 per 1,000 dataset rows, billed to your own Apify account**. Supply your API token through `APIFY_TOKEN`. Each call starts an actor run with `emitOnlyNew: false`, `snapshotCount: 1`, and `maxItems` as the billed-row cap. A default 50-row call costs up to $0.40 at this row price.
+Actor usage costs **$8 per 1,000 dataset rows (rising to $15 in December), billed to your own Apify account**. Supply your API token through `APIFY_TOKEN`. Each call starts an actor run with `emitOnlyNew: false`, `snapshotCount: 1`, and `maxItems` as the billed-row cap. A default 50-row call costs up to $0.40 at this row price.
 
 | Tool | Inputs | Result |
 | --- | --- | --- |
@@ -73,7 +73,7 @@ To use Docker from Claude Desktop or Cursor, set `command` to `docker`, `args` t
 
 The included `smithery.yaml` declares a stdio start command and requires the `apifyToken` configuration value. Smithery maps that value to `APIFY_TOKEN` and starts `node dist/index.js`; the included multi-stage Dockerfile supplies the build and runtime. Supply your own token when configuring the server.
 
-The [official Apify MCP](https://mcp.apify.com/?tools=china.unofficial/china-news-feed) also works generically with this actor. This wrapper adds dedicated tools, local headline filtering, language projection, and compact output.
+The [official Apify MCP](https://mcp.apify.com/?tools=china.unofficial/china-hot-search-english) also works generically with this actor. This wrapper adds dedicated tools, local headline filtering, language projection, and compact output.
 
 ## Sample output
 
@@ -128,4 +128,4 @@ Tests use mocked fetch responses and the provided fixtures, with no paid actor r
 
 - Free sample rows on GitHub: https://github.com/Ownly-Network/china-news-feed-samples
 - Hugging Face dataset: https://huggingface.co/datasets/freedom-press/china-news-feed-sample
-- Apify actor: https://apify.com/china.unofficial/china-news-feed
+- Apify actor: https://apify.com/china.unofficial/china-hot-search-english
